@@ -14,7 +14,15 @@ describe("QuestionCard", () => {
     fireEvent.click(screen.getByRole("button", { name: /Nova/ }));
     expect(submit).toBeEnabled();
     fireEvent.click(submit);
-    expect(onAnswer).toHaveBeenCalledWith("Nova");
+    expect(onAnswer).toHaveBeenCalledWith("Nova", "maybe", false);
+  });
+
+  it("hides the artist and reveals a cover clue only when asked", () => {
+    const cover = { ...question, id: "cover", type: "cover" as const, clue: "The artist begins with N." };
+    render(<QuestionCard question={cover} questionNumber={1} totalQuestions={1} onAnswer={vi.fn()} />);
+    expect(screen.getByText("Artist hidden")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /Reveal a clue/ }));
+    expect(screen.getByText("The artist begins with N.")).toBeInTheDocument();
   });
 
   it("clears a prior selection when the next question is displayed", () => {

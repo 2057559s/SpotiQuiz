@@ -8,6 +8,7 @@ import { Track } from "@/lib/quiz";
 export default function QuizPage() {
   const { data: session, status } = useSession();
   const [tracks, setTracks] = useState<Track[]>([]);
+  const [recent, setRecent] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,6 +35,7 @@ export default function QuizPage() {
 
       const data = await response.json();
       setTracks(data.tracks || []);
+      setRecent(data.recent || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -88,5 +90,5 @@ export default function QuizPage() {
     );
   }
 
-  return <QuizComponent tracks={tracks} userKey={session?.user?.email || session?.user?.name || "spotify-player"} />;
+  return <QuizComponent tracks={tracks} recent={recent} userKey={session?.user?.email || session?.user?.name || "spotify-player"} />;
 }

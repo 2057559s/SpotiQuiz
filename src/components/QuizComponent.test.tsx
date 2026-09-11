@@ -18,12 +18,12 @@ describe("QuizComponent", () => {
     fireEvent.click(screen.getByRole("button", { name: "Play daily challenge" }));
     fireEvent.click(screen.getByRole("button", { name: /Nova$/ }));
     fireEvent.click(screen.getByRole("button", { name: "See my result" }));
-    expect(screen.getByText("Taste-maker")).toBeInTheDocument();
+    expect(screen.getByText("Deep listener")).toBeInTheDocument();
     const history = JSON.parse(localStorage.getItem("spotiquiz:answers:player@example.com") || "[]");
     const progress = JSON.parse(localStorage.getItem("spotiquiz:player:player@example.com") || "{}");
     expect(history).toHaveLength(1);
     expect(history[0]).toMatchObject({ answer: "Nova", correctAnswer: "Nova", isCorrect: true });
-    expect(progress.rounds[0]).toMatchObject({ mode: "daily", score: 1, total: 1 });
+    expect(progress.rounds[0]).toMatchObject({ mode: "daily", score: 2, total: 3 });
   });
 
   it("allows the player to return to the game selection after a result", () => {

@@ -12,3 +12,5 @@ coverage/
 # Local certificates
 *.pem
 *.key
+.vercel
+tsconfig.tsbuildinfo
