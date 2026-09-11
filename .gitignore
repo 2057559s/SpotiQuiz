@@ -1,0 +1,14 @@
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+
+# Build output and local tooling
+.next/
+.next-prod/
+node_modules/
+coverage/
+
+# Local certificates
+*.pem
+*.key
